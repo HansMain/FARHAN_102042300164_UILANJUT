@@ -65,6 +65,12 @@ const routes = [
         ],
       },
       {
+        path: 'speakers',
+        name: 'speakers',
+        component: () => import('@/views/Speakers.vue'),
+        meta: { breadcrumb: 'Speakers' },
+      },
+      {
         path: 'contact',
         name: 'contact',
         component: () => import('@/views/Contact.vue'),

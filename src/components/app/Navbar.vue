@@ -21,6 +21,7 @@ const menus = [
       { name: 'Your Events', path: '/browse/your-events' },
     ],
   },
+  { name: 'Speakers', path: '/speakers' },
   { name: 'Contact', path: '/contact' },
   { name: 'Organizer Dashboard', path: '/dashboard' },
 ]

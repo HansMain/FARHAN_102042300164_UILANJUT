@@ -10,6 +10,10 @@ defineProps({
   variant: {
     type: String,
     default: 'primary'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 defineEmits(['click']);
@@ -27,6 +31,12 @@ defineEmits(['click']);
   display: inline-block;
   text-align: center;
   transition: transform 0.2s, background-color 0.2s;
+}
+
+.app-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
 .app-button:hover {

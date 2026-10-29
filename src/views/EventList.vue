@@ -10,7 +10,12 @@ import AppButton from '@/components/ui/AppButton.vue';
 const router = useRouter();
 
 // MENGONSUMSI SINGLE SOURCE OF TRUTH (Hanya mengambil event yang berstatus aktif)
-const { activeEvents, isUserRegistered } = useEvents();
+const {
+  activeEvents,
+  isUserRegistered,
+  importSampleEventsFromApi,
+  isImportingApi,
+} = useEvents();
 
 const searchQuery = ref('');
 const selectedCategory = ref('All');
@@ -68,6 +73,13 @@ const handleViewDetail = (id) => {
       <div class="empty-action">
         <AppButton variant="primary" @click="router.push('/dashboard')">
           Go to Organizer Dashboard &rarr;
+        </AppButton>
+        <AppButton
+          variant="outline"
+          :disabled="isImportingApi"
+          @click="importSampleEventsFromApi"
+        >
+          {{ isImportingApi ? '⏳ Mengambil Data dari API...' : '⚡ Muat Contoh Event dari API' }}
         </AppButton>
       </div>
     </div>
@@ -144,5 +156,8 @@ const handleViewDetail = (id) => {
 .empty-action {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 </style>

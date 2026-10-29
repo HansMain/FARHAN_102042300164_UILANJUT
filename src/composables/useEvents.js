@@ -142,15 +142,27 @@ export function useEvents() {
     return false;
   };
 
-  // FUNGSI RESET DATA PENGUJIAN
-  const clearAllEvents = () => {
-    events.value = [];
-    localStorage.removeItem(EVENTS_STORAGE_KEY);
-  };
+  // INTEGRASI API: IMPORT DATA EVENT SAMPLE DARI DUMMY API
+  const isImportingApi = ref(false);
+  const importError = ref(null);
 
-  const clearAllRegistrations = () => {
-    userRegistrations.value = [];
-    localStorage.removeItem(REGISTRATIONS_STORAGE_KEY);
+  const importSampleEventsFromApi = async () => {
+    isImportingApi.value = true;
+    importError.value = null;
+    try {
+      const { dummyEventService } = await import('@/services/api');
+      const sampleEvents = await dummyEventService.fetchSampleEvents(6);
+      
+      // Tambahkan event dari API ke daftar event
+      events.value = [...sampleEvents, ...events.value];
+      return sampleEvents;
+    } catch (err) {
+      console.error('Gagal mengambil data event dari API:', err);
+      importError.value = 'Gagal mengimpor event dari API. Pastikan terkoneksi internet.';
+      throw err;
+    } finally {
+      isImportingApi.value = false;
+    }
   };
 
   return {
@@ -160,6 +172,9 @@ export function useEvents() {
     completedEvents,
     userRegistrations,
     totalRegistrations,
+    isImportingApi,
+    importError,
+    importSampleEventsFromApi,
     createEvent,
     completeEvent,
     deleteEvent,
