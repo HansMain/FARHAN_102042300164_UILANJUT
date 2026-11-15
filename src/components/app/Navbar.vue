@@ -18,9 +18,12 @@ const menus = [
         children: [{ name: 'Event Detail (Sample)', path: '/browse/events/1' }],
       },
       { name: 'Category', path: '/browse/category' },
+      { name: 'Your Events', path: '/browse/your-events' },
     ],
   },
+  { name: 'Speakers', path: '/speakers' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Organizer Dashboard', path: '/dashboard' },
 ]
 
 const handleScroll = () => {
